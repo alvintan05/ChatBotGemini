@@ -2,15 +2,12 @@ package com.aldev.chatbotgemini.presentation
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.aldev.chatbotgemini.R
 import com.aldev.chatbotgemini.data.Chat
 import com.aldev.chatbotgemini.databinding.ActivityMainBinding
+import com.aldev.chatbotgemini.presentation.adapter.MainAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

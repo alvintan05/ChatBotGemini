@@ -1,4 +1,4 @@
-package com.aldev.chatbotgemini.presentation
+package com.aldev.chatbotgemini.presentation.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.aldev.chatbotgemini.data.Chat

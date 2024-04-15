@@ -5,13 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aldev.chatbotgemini.data.Chat
-import com.aldev.chatbotgemini.util.ChatUtil
+import com.aldev.chatbotgemini.repository.ChatBotRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(): ViewModel() {
+class MainViewModel @Inject constructor(
+    private val repository: ChatBotRepository
+): ViewModel() {
+
     private val chatList = mutableListOf<Chat>()
     private val successGeminiLiveData: MutableLiveData<List<Chat>> = MutableLiveData()
     private val errorGeminiLiveData: MutableLiveData<String> = MutableLiveData()
@@ -33,9 +36,9 @@ class MainViewModel @Inject constructor(): ViewModel() {
         return errorGeminiLiveData
     }
 
-    fun sendQuestion(prompt: String) {
+    private fun sendQuestion(prompt: String) {
         viewModelScope.launch {
-            val chatResponse = ChatUtil.getResponse(prompt)
+            val chatResponse = repository.getTextResponseFromGemini(prompt)
             if (chatResponse.isError) {
                 errorGeminiLiveData.value = chatResponse.prompt
             } else {

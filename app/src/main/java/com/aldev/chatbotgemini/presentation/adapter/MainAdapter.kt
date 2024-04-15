@@ -1,4 +1,4 @@
-package com.aldev.chatbotgemini.presentation
+package com.aldev.chatbotgemini.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
