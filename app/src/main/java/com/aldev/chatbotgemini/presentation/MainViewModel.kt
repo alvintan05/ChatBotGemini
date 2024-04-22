@@ -36,6 +36,10 @@ class MainViewModel @Inject constructor(
         return errorGeminiLiveData
     }
 
+    private fun validatePromptInput(prompt: String) {
+
+    }
+
     private fun sendQuestion(prompt: String) {
         viewModelScope.launch {
             val chatResponse = repository.getTextResponseFromGemini(prompt)

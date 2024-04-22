@@ -1,9 +1,15 @@
 package com.aldev.chatbotgemini.presentation
 
+import android.app.Activity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aldev.chatbotgemini.data.Chat
 import com.aldev.chatbotgemini.databinding.ActivityMainBinding
@@ -23,16 +29,37 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupView()
         setupRecyclerView()
         observeLiveData()
+    }
 
-        binding.ivSend.setOnClickListener {
-            val inputText = binding.edtChat.text.toString()
-            if (inputText.isNotBlank()) {
+    private fun setupView() {
+        with(binding) {
+            edtChat.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    ivSend.isVisible = (p0?.isNotBlank() == true)
+                }
+
+                override fun afterTextChanged(p0: Editable?) {}
+            })
+            ivSend.setOnClickListener {
+                val inputText = edtChat.text.toString()
                 viewModel.addChatList(Chat(inputText, true, false))
                 mainAdapter.setListItem(viewModel.getChatList())
-                binding.edtChat.text.clear()
+                edtChat.text.clear()
+                hideKeyboard()
             }
+        }
+    }
+
+    private fun hideKeyboard() {
+        val view = this.currentFocus
+        if (view != null) {
+            val inputManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as? InputMethodManager
+            inputManager?.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 
