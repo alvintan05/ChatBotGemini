@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".presentation.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -20,8 +21,10 @@
         android:id="@+id/cl_text_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/purple_200"
         android:padding="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_input_text"
+        android:layout_marginHorizontal="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -31,7 +34,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:background="@android:color/transparent"
             app:layout_goneMarginEnd="0dp"
+            android:padding="12dp"
+            android:inputType="text"
             android:hint="Masukkan perintah di sini"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_send"
@@ -44,6 +50,7 @@
             android:layout_width="40dp"
             android:layout_height="0dp"
             android:visibility="gone"
+            android:padding="4dp"
             tools:visibility="visible"
             android:src="@drawable/ic_send"
             app:layout_constraintBottom_toBottomOf="parent"
